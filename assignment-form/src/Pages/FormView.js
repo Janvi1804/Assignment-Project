@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 
@@ -184,18 +184,35 @@ function FormView() {
   const [responses, setResponses] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => { fetchForm(); }, []);
+//   useEffect(() => { fetchForm(); }, [fetchForm]);
 
-  const fetchForm = async () => {
-    const res = await axios.get(`http://https://assignment-project-na28.onrender.com/form/${id}`);
-    setForm(res.data.form);
-    setFields(res.data.fields);
-  };
+// useEffect(() => {
+//   fetchForm();
+// }, [fetchForm]);
+
+// const fetchForm = async () => {
+//   const res = await axios.get(`http://https://assignment-project-na28.onrender.com/form/${id}`);
+//   setForm(res.data.form);
+//   setFields(res.data.fields);
+// };
+
+
+const fetchForm = useCallback(async () => {
+  const res = await axios.get(`https://assignment-project-na28.onrender.com/form/${id}`);
+  setForm(res.data.form);
+  setFields(res.data.fields);
+}, [id]);
+
+useEffect(() => {
+  fetchForm();
+}, [fetchForm]);
+
+
 
   const handleChange = (label, value) => setResponses({ ...responses, [label]: value });
 
   const submitForm = async () => {
-    await axios.post('http://https://assignment-project-na28.onrender.com/submit-response', { formId: id, responseData: responses });
+    await axios.post('https://assignment-project-na28.onrender.com/submit-response', { formId: id, responseData: responses });
     setSubmitted(true);
   };
 
