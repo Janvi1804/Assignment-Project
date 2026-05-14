@@ -232,12 +232,30 @@ function Responses() {
   const { id } = useParams();
   const [responses, setResponses] = useState([]);
 
-  useEffect(() => { fetchResponses(); }, []);
+//   useEffect(() => { fetchResponses(); }, [fetchResponses]);
 
+//   const fetchResponses = async () => {
+//     const res = await axios.get(`http://https://assignment-project-na28.onrender.com/responses/${id}`);
+//     setResponses(res.data);
+//   };
+
+
+useEffect(() => {
   const fetchResponses = async () => {
-    const res = await axios.get(`http://https://assignment-project-na28.onrender.com/responses/${id}`);
-    setResponses(res.data);
+    try {
+      const res = await axios.get(
+        `https://assignment-project-na28.onrender.com/responses/${id}`
+      );
+      setResponses(res.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  fetchResponses();
+}, [id]);
+
+
 
   return (
     <>
