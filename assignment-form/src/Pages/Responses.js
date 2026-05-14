@@ -235,7 +235,7 @@ function Responses() {
   useEffect(() => { fetchResponses(); }, []);
 
   const fetchResponses = async () => {
-    const res = await axios.get(`http://assignment-form.onrender.com/responses/${id}`);
+    const res = await axios.get(`http://https://assignment-project-na28.onrender.com/responses/${id}`);
     setResponses(res.data);
   };
 

@@ -183,12 +183,12 @@ function Dashboard() {
   useEffect(() => { fetchForms(); }, []);
 
   const fetchForms = async () => {
-    const res = await axios.get('http://assignment-form.onrender.com/forms');
+    const res = await axios.get('http://https://assignment-project-na28.onrender.com/forms');
     setForms(res.data);
   };
 
   const deleteForm = async (id) => {
-    await axios.delete(`http://assignment-form.onrender.com/delete-form/${id}`);
+    await axios.delete(`http://https://assignment-project-na28.onrender.com/delete-form/${id}`);
     fetchForms();
   };
 
